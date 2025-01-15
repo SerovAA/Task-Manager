@@ -4,4 +4,4 @@ __pycache__
 .env
 .coverage
 dist/
-
+db.sqlite3
