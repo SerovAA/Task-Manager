@@ -3,5 +3,7 @@ __pycache__
 .idea
 .env
 .coverage
+.python-version
 dist/
 db.sqlite3
+ruff.toml
