@@ -35,6 +35,7 @@ ALLOWED_HOSTS = [
     "webserver",
     "127.0.0.1",
     "localhost",
+    "https://python-project-52-kxra.onrender.com"
 ]
 
 
@@ -47,6 +48,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django_bootstrap5',
 
 ]
 
