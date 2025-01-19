@@ -1,10 +1,10 @@
-from django.urls import reverse_lazy
-from django.views.generic import ListView, CreateView, UpdateView, DeleteView
-from django.contrib.messages.views import SuccessMessageMixin
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.messages.views import SuccessMessageMixin
+from django.urls import reverse_lazy
+from django.views.generic import CreateView, DeleteView, ListView, UpdateView
 
-from .models import Statuses
 from .forms import CreateUpdateStatusForm
+from .models import Statuses
 
 
 class Statuses_Home(LoginRequiredMixin, SuccessMessageMixin, ListView):
