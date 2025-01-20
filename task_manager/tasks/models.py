@@ -1,6 +1,7 @@
 from django.contrib.auth import get_user_model
 from django.db import models
 
+from task_manager.labels.models import Labels
 from task_manager.statuses.models import Statuses
 from task_manager.users.models import User
 
@@ -43,6 +44,12 @@ class Tasks(models.Model):
         null=True,
         verbose_name='Исполнитель',
         related_name='executor',
+    )
+    labels = models.ManyToManyField(
+        Labels,
+        blank=True,
+        verbose_name='метки',
+        related_name='labels',
     )
 
     def __str__(self):

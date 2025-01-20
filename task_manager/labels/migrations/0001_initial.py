@@ -12,10 +12,10 @@ class Migration(migrations.Migration):
 
     operations = [
         migrations.CreateModel(
-            name='Statuses',
+            name='Labels',
             fields=[
                 ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('name', models.CharField(max_length=255, unique=True, verbose_name='Name')),
+                ('name', models.CharField(max_length=255, unique=True, verbose_name='Имя')),
                 ('time_create', models.DateTimeField(auto_now_add=True, verbose_name='Дата создания')),
             ],
         ),
