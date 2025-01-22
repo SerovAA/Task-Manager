@@ -1,9 +1,14 @@
 install:
 	uv sync
-dev:
+
+migrate:
+	python manage.py makemigrations
+	python manage.py migrate
+
+start-l:
 	uv run python manage.py runserver
-start-render:
-	gunicorn task_manager.wsgi:application --bind 0.0.0.0:8000
+start-r:
+	gunicorn task_manager.wsgi:application --bind 127.0.0.1:8000
 
 build:
 	./build.sh

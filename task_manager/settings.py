@@ -29,7 +29,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = os.getenv("SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = [
     "webserver",
@@ -65,6 +65,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    "rollbar.contrib.django.middleware.RollbarNotifierMiddleware",
 
 ]
 
@@ -148,3 +149,10 @@ LOGOUT_REDIRECT_URL = "home"
 LOGIN_URL = "login"
 
 AUTH_USER_MODEL = 'users.User'
+
+ROLLBAR = {
+    "access_token": os.getenv("ACCRSS_TOKEN"),
+    "environment": "development" if DEBUG else "production",
+    "code_version": "1.0",
+    "root": BASE_DIR,
+}
