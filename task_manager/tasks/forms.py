@@ -11,4 +11,5 @@ class CreateUpdateTaskForm(forms.ModelForm):
             "description",
             "status",
             "executor",
+            "labels",
         ]

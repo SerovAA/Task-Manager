@@ -1,4 +1,3 @@
-from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.messages.views import SuccessMessageMixin
 from django.urls import reverse_lazy
 from django.views.generic import CreateView, DeleteView, ListView, UpdateView
@@ -6,8 +5,10 @@ from django.views.generic import CreateView, DeleteView, ListView, UpdateView
 from .forms import CreateUpdateStatusForm
 from .models import Statuses
 
+from task_manager.custom_contrib_mixins import (MixinDeleteStatus,
+                                                MixinLoginRequired)
 
-class Statuses_Home(LoginRequiredMixin, SuccessMessageMixin, ListView):
+class StatusesHome(MixinLoginRequired, SuccessMessageMixin, ListView):
     model = Statuses
     template_name = 'statuses/statuses.html'
     context_object_name = 'statuses'
@@ -19,7 +20,7 @@ class Statuses_Home(LoginRequiredMixin, SuccessMessageMixin, ListView):
         return Statuses.objects.all()
 
 
-class Statuses_Create(LoginRequiredMixin, SuccessMessageMixin, CreateView):
+class StatusesCreate(MixinLoginRequired, SuccessMessageMixin, CreateView):
     form_class = CreateUpdateStatusForm
     model = Statuses
     template_name = 'actions/create_or_update.html'
@@ -31,7 +32,7 @@ class Statuses_Create(LoginRequiredMixin, SuccessMessageMixin, CreateView):
     }
 
 
-class Statuses_Update(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
+class StatusesUpdate(MixinLoginRequired, SuccessMessageMixin, UpdateView):
     form_class = CreateUpdateStatusForm
     model = Statuses
     template_name = 'actions/create_or_update.html'
@@ -43,7 +44,8 @@ class Statuses_Update(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
     }
 
 
-class Statuses_Delete(LoginRequiredMixin, SuccessMessageMixin, DeleteView):
+class StatusesDelete(MixinLoginRequired, SuccessMessageMixin,
+                      MixinDeleteStatus, DeleteView,):
     model = Statuses
     template_name = 'actions/delete.html'
     success_url = reverse_lazy('statuses')
@@ -52,3 +54,6 @@ class Statuses_Delete(LoginRequiredMixin, SuccessMessageMixin, DeleteView):
     extra_context = {
         'title': 'Удаление статуса'
     }
+    messages_for_error = ('Невозможно удалить статус, '
+                          'потому что он используется')
+    redirect_for_error = "statuses"
