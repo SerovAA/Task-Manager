@@ -65,7 +65,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    "rollbar.contrib.django.middleware.RollbarNotifierMiddleware",
+
 
 ]
 
@@ -150,9 +150,3 @@ LOGIN_URL = "login"
 
 AUTH_USER_MODEL = 'users.User'
 
-ROLLBAR = {
-    "access_token": os.getenv("ACCESS_TOKEN"),
-    "environment": "development" if DEBUG else "production",
-    "code_version": "1.0",
-    "root": BASE_DIR,
-}
