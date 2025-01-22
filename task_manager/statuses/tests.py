@@ -38,7 +38,8 @@ class TestStatuses(TestCase):
 
     def test_status_update(self):
         response = self.client.post(
-            reverse("statuses_update", kwargs={"status_id": self.todo_status.id}),
+            reverse("statuses_update",
+                    kwargs={"status_id": self.todo_status.id}),
             {"name": "Backlog"}
         )
         self.assertEqual(response.status_code, 302)
@@ -47,7 +48,8 @@ class TestStatuses(TestCase):
 
     def test_status_delete(self):
         response = self.client.post(
-            reverse("statuses_delete", kwargs={"status_id": self.completed_status.id})
+            reverse("statuses_delete",
+                    kwargs={"status_id": self.completed_status.id})
         )
         self.assertEqual(response.status_code, 302)
         self.assertRedirects(response, reverse("statuses"))

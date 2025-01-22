@@ -19,7 +19,7 @@ class TestStatuses(TestCase):
         cls.completed_status = Statuses.objects.create(name="Completed")
 
     def setUp(self):
-         self.client.force_login(self.user)
+        self.client.force_login(self.user)
 
     def test_status_list(self):
         response = self.client.get(reverse("statuses"))
@@ -38,7 +38,8 @@ class TestStatuses(TestCase):
 
     def test_status_update(self):
         response = self.client.post(
-            reverse("statuses_update", kwargs={"status_id": self.todo_status.id}),
+            reverse("statuses_update",
+                    kwargs={"status_id": self.todo_status.id}),
             {"name": "Backlog"}
         )
         self.assertEqual(response.status_code, 302)
@@ -47,7 +48,8 @@ class TestStatuses(TestCase):
 
     def test_status_delete(self):
         response = self.client.post(
-            reverse("statuses_delete", kwargs={"status_id": self.completed_status.id})
+            reverse("statuses_delete",
+                    kwargs={"status_id": self.completed_status.id})
         )
         self.assertEqual(response.status_code, 302)
         self.assertRedirects(response, reverse("statuses"))

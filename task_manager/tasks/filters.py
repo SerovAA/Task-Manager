@@ -9,21 +9,21 @@ from task_manager.users.models import User
 
 class FilterTasks(FilterSet):
     status = ModelChoiceFilter(
-        queryset = Statuses.objects.all(),
+        queryset=Statuses.objects.all(),
         label='Статус'
     )
     executor = ModelChoiceFilter(
-        queryset = User.objects.all(),
-        label = 'Исполнитель',
+        queryset=User.objects.all(),
+        label='Исполнитель',
     )
     labels = ModelChoiceFilter(
-        queryset = Labels.objects.all(),
-        label = 'Метки',
+        queryset=Labels.objects.all(),
+        label='Метки',
     )
     tasks_user = BooleanFilter(
-        label = 'Только свои задачи',
-        widget = CheckboxInput,
-        method = 'filter_tasks_user',
+        label='Только свои задачи',
+        widget=CheckboxInput,
+        method='filter_tasks_user',
     )
 
     def filter_tasks_user(self, queryset, name, value):

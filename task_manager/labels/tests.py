@@ -54,4 +54,5 @@ class TestLabels(TestCase):
         self.assertEqual(response.status_code, 302)
         self.assertEqual(Labels.objects.count(), 2)
         self.assertEqual(Labels.objects.get(pk=self.work_label.id).name, "Work")
-        self.assertEqual(Labels.objects.get(pk=self.personal_label.id).name, "Personal")
+        self.assertEqual(
+            Labels.objects.get(pk=self.personal_label.id).name, "Personal")

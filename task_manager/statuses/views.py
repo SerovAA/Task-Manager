@@ -2,11 +2,14 @@ from django.contrib.messages.views import SuccessMessageMixin
 from django.urls import reverse_lazy
 from django.views.generic import CreateView, DeleteView, ListView, UpdateView
 
+from task_manager.custom_contrib_mixins import (
+    MixinDeleteStatus,
+    MixinLoginRequired,
+)
+
 from .forms import CreateUpdateStatusForm
 from .models import Statuses
 
-from task_manager.custom_contrib_mixins import (MixinDeleteStatus,
-                                                MixinLoginRequired)
 
 class StatusesHome(MixinLoginRequired, SuccessMessageMixin, ListView):
     model = Statuses

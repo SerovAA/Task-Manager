@@ -7,17 +7,16 @@ TEXT = ('Обязательное поле. '
                'Только буквы, цифры и символы @/./+/-/_.')
 
 
-
 class RegisterUserForm(UserCreationForm):
-    first_name = forms.CharField(label = 'Имя')
-    last_name = forms.CharField(label = 'Фамилия')
+    first_name = forms.CharField(label='Имя')
+    last_name = forms.CharField(label='Фамилия')
     username = forms.CharField(
-        label = 'Имя пользователя',
-        help_text = TEXT)
+        label='Имя пользователя',
+        help_text=TEXT)
     password1 = forms.CharField(
-        label = 'Пароль', widget=forms.PasswordInput())
+        label='Пароль', widget=forms.PasswordInput())
     password2 = forms.CharField(
-        label = 'Подтверждение пароля', widget=forms.PasswordInput())
+        label='Подтверждение пароля', widget=forms.PasswordInput())
 
     class Meta:
         model = get_user_model()

@@ -1,12 +1,19 @@
 from django.contrib.messages.views import SuccessMessageMixin
 from django.urls import reverse_lazy
-from django.views.generic import (CreateView, DeleteView, DetailView,
-                                  ListView, UpdateView)
+from django.views.generic import (
+    CreateView,
+    DeleteView,
+    DetailView,
+    ListView,
+    UpdateView,
+)
 from django_filters.views import FilterView
 
+from task_manager.custom_contrib_mixins import (
+    MixinDeleteTask,
+    MixinLoginRequired,
+)
 from task_manager.tasks.filters import FilterTasks
-from task_manager.custom_contrib_mixins import (MixinDeleteTask,
-                                                MixinLoginRequired)
 
 from .forms import CreateUpdateTaskForm
 from .models import Tasks

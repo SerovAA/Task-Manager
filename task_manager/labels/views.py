@@ -2,7 +2,10 @@ from django.contrib.messages.views import SuccessMessageMixin
 from django.urls import reverse_lazy
 from django.views.generic import CreateView, DeleteView, ListView, UpdateView
 
-from task_manager.custom_contrib_mixins import MixinDeleteLabel, MixinLoginRequired
+from task_manager.custom_contrib_mixins import (
+    MixinDeleteLabel,
+    MixinLoginRequired,
+)
 
 from .forms import CreateUpdateLabelForm
 from .models import Labels
@@ -55,5 +58,6 @@ class LabelsDelete(MixinLoginRequired, SuccessMessageMixin,
     }
     success_url = reverse_lazy("labels")
     success_message = "Метка была успешно удалена"
-    #messages_for_error = 'Невозможно удалить метку, потому что она используется'
-    #redirect_for_error = "labels"
+    messages_for_error = ('Невозможно удалить метку, '
+                          'потому что она используется')
+    redirect_for_error = "labels"

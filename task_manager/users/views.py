@@ -2,10 +2,14 @@ from django.contrib.messages.views import SuccessMessageMixin
 from django.urls import reverse_lazy
 from django.views.generic import CreateView, DeleteView, ListView, UpdateView
 
+from task_manager.custom_contrib_mixins import (
+    MixinDeleteUser,
+    MixinLoginRequired,
+    MixinUpdateUser,
+)
 from task_manager.users.forms import RegisterUserForm, UsersChangeForm
 from task_manager.users.models import User
-from task_manager.custom_contrib_mixins import (
-    MixinDeleteUser, MixinLoginRequired, MixinUpdateUser)
+
 
 class Users(ListView):
     model = User

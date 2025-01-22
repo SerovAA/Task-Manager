@@ -8,48 +8,48 @@ from task_manager.users.models import User
 
 class Tasks(models.Model):
     name = models.CharField(
-        max_length = 255,
-        unique = True,
-        verbose_name = "Имя"
+        max_length=255,
+        unique=True,
+        verbose_name="Имя"
     )
     time_create = models.DateTimeField(
-        auto_now_add = True,
-        verbose_name = 'Дата создания'
+        auto_now_add=True,
+        verbose_name='Дата создания'
     )
     description = models.TextField(
-        max_length = 255,
-        blank = True,
-        null = True,
-        verbose_name = 'Описание'
+        max_length=255,
+        blank=True,
+        null=True,
+        verbose_name='Описание'
     )
 
     status = models.ForeignKey(
         Statuses,
-        on_delete = models.PROTECT,
-        null = True,
-        verbose_name = 'Статус',
-        related_name = 'status',
+        on_delete=models.PROTECT,
+        null=True,
+        verbose_name='Статус',
+        related_name='status',
     )
     author = models.ForeignKey(
         get_user_model(),
-        on_delete = models.PROTECT,
-        null = True,
-        verbose_name = 'Автор',
-        related_name = 'author',
+        on_delete=models.PROTECT,
+        null=True,
+        verbose_name='Автор',
+        related_name='author',
 
     )
     executor = models.ForeignKey(
         User,
-        on_delete = models.PROTECT,
-        null = True,
-        verbose_name = 'Исполнитель',
-        related_name = 'executor',
+        on_delete=models.PROTECT,
+        null=True,
+        verbose_name='Исполнитель',
+        related_name='executor',
     )
     labels = models.ManyToManyField(
         Labels,
-        blank = True,
-        verbose_name = 'метки',
-        related_name = 'labels',
+        blank=True,
+        verbose_name='метки',
+        related_name='labels',
     )
 
     def __str__(self):
