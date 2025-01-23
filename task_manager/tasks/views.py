@@ -84,3 +84,5 @@ class TaskDelete(MixinLoginRequired, SuccessMessageMixin,
     extra_context = {
         'title': 'Удаление задачи'
     }
+    messages_for_error = "Задачу может удалить только ее автор"
+    redirect_for_error = "tasks"
