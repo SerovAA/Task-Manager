@@ -52,12 +52,12 @@ class LabelsDelete(MixinLoginRequired, SuccessMessageMixin,
     template_name = "actions/delete.html"
     pk_url_kwarg = "label_id"
     context_object_name = "labels_Delete"
+    success_message = "Метка успешно удалена"
     extra_context = {
         "title": 'Удаление метки',
         "button_text": 'Да, удалить',
     }
     success_url = reverse_lazy("labels")
-    success_message = "Метка была успешно удалена"
     messages_for_error = ('Невозможно удалить метку, '
                           'потому что она используется')
     redirect_for_error = "labels"
