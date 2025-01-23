@@ -28,7 +28,7 @@ class StatusesCreate(MixinLoginRequired, SuccessMessageMixin, CreateView):
     model = Statuses
     template_name = 'actions/create_or_update.html'
     success_url = reverse_lazy('statuses')
-    success_message = ('Статус успешно создан')
+    success_message = 'Статус успешно создан'
     extra_context = {
         'title': 'Создать статус',
         'button_text': 'Создать',
@@ -41,6 +41,7 @@ class StatusesUpdate(MixinLoginRequired, SuccessMessageMixin, UpdateView):
     template_name = 'actions/create_or_update.html'
     success_url = reverse_lazy('statuses')
     pk_url_kwarg = 'status_id'
+    success_message = 'Статус успешно изменен'
     extra_context = {
         'title': 'Изменение статуса',
         'button_text': 'Изменить',
@@ -54,6 +55,7 @@ class StatusesDelete(MixinLoginRequired, SuccessMessageMixin,
     success_url = reverse_lazy('statuses')
     denied_url = reverse_lazy('statuses')
     pk_url_kwarg = 'status_id'
+    success_message = 'Статус успешно удален'
     extra_context = {
         'title': 'Удаление статуса'
     }
