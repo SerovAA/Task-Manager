@@ -36,12 +36,13 @@ class Users_Update(MixinLoginRequired, SuccessMessageMixin,
     template_name = 'actions/create_or_update.html'
     success_url = reverse_lazy('users')
     pk_url_kwarg = 'user_id'
-    success_message = ('Пользователь успешно изменен')
+    success_message = 'Пользователь успешно изменен'
     extra_context = {
         'title': 'Изменение пользователя',
         'button_text': 'Изменить',
     }
-    messages_for_error = 'У вас нет прав для изменения другого пользователя.'
+    messages_for_error = ('У вас нет прав для '
+                          'изменения другого пользователя.')
     redirect_for_error = 'users'
 
 
@@ -51,12 +52,12 @@ class User_Delete(MixinLoginRequired, SuccessMessageMixin,
     template_name = 'actions/delete.html'
     success_url = reverse_lazy('users')
     pk_url_kwarg = 'user_id'
-    success_message = ('Пользователь успешно удален')
+    success_message = 'Пользователь успешно удален'
     extra_context = {
         'title': 'Удаление пользователя',
         'button_text': 'Удалить',
     }
-    messages_for_error_get = ('Невозможно удалить пользователя, '
-                              'потому что он используется')
-    messages_for_error_post = ('У вас нет прав для изменения')
+    flash_get = 'У вас нет прав для изменения другого пользователя.'
+    flash_post = ('Невозможно удалить пользователя,'
+                  ' потому что он используется')
     redirect_for_error = 'users'
