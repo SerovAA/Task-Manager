@@ -18,7 +18,7 @@ class FilterTasks(FilterSet):
     )
     labels = ModelChoiceFilter(
         queryset=Labels.objects.all(),
-        label='Метки',
+        label='Метка',
     )
     tasks_user = BooleanFilter(
         label='Только свои задачи',
