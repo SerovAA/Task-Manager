@@ -67,6 +67,7 @@ class TaskUpdate(MixinLoginRequired, SuccessMessageMixin, UpdateView):
     template_name = 'actions/create_or_update.html'
     success_url = reverse_lazy('tasks')
     pk_url_kwarg = 'task_id'
+    success_message = 'Задача успешно изменена'
     extra_context = {
         'title': 'Изменение задачи',
         'button_text': 'Изменить',
@@ -79,7 +80,7 @@ class TaskDelete(MixinLoginRequired, SuccessMessageMixin,
     template_name = 'actions/delete.html'
     success_url = reverse_lazy('tasks')
     pk_url_kwarg = 'task_id'
-    success_message = 'Задача была успешно удалена.'
+    success_message = 'Задача успешно удалена'
     extra_context = {
         'title': 'Удаление задачи'
     }
