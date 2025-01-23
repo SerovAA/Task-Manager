@@ -34,7 +34,7 @@ class MixinDeleteTask:
     def get(self, request, *args, **kwargs):
         if self.get_object().author != self.request.user:
             messages.error(
-                self.request, 'Задача может быть удалена только ее автором'
+                self.request, 'Задачу может удалить только ее автор'
             )
             return redirect(self.redirect_for_error)
         return super().get(request, *args, **kwargs)
