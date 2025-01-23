@@ -43,7 +43,7 @@ class LabelsUpdate(MixinLoginRequired, SuccessMessageMixin, UpdateView):
         "title": 'Изменение метки',
         "button_text": 'Изменить',
  }
-    success_message = 'Метка была успешно изменена'
+    success_message = 'Метка успешно изменена'
 
 
 class LabelsDelete(MixinLoginRequired, SuccessMessageMixin,
