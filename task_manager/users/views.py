@@ -21,7 +21,7 @@ class Users_Create(SuccessMessageMixin, CreateView):
     form_class = RegisterUserForm
     model = User
     template_name = 'actions/create_or_update.html'
-    success_message = ('Пользователь успешно зарегестрирован')
+    success_message = ('Пользователь успешно зарегистрирован')
     success_url = reverse_lazy('login')
     extra_context = {
         'title': 'Регистрация',
