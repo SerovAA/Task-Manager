@@ -4,6 +4,10 @@ on:
   - push
   - pull_request
 
+env:
+  SECRET_KEY: : ${{ secrets.SECRET_KEY }}
+  DJANGO_SETTINGS_MODULE: task_manager.settings
+
 jobs:
   build:
     runs-on: ubuntu-latest
