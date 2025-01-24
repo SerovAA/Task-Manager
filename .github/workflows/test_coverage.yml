@@ -18,7 +18,7 @@ jobs:
           python-version: ${{ matrix.python-version }}
       - name: Install dependencies
         run: |
-          pip install uv
+          curl -LsSf https://astral.sh/uv/install.sh | sh
           uv sync
       - name: Test & publish code coverage
         uses: paambaati/codeclimate-action@v5.0.0
@@ -26,5 +26,5 @@ jobs:
         env:
           CC_TEST_REPORTER_ID: ${{ secrets.CC_TEST_REPORTER_ID }}
         with:
-          coverageCommand: uv run python3 -m pytest --cov=task_manager --cov-report=xml:coverage.xml
+          coverageCommand: python3 -m pytest --cov=task_manager --cov-report=xml:coverage.xml
           debug: true
