@@ -13,13 +13,11 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 import os
 from pathlib import Path
 import dj_database_url
-from dotenv import load_dotenv
+
 
 if "DEBUG" not in os.environ:
-    load_dotenv(".env_example")
-else:
-    load_dotenv()
-
+    from dotenv import load_dotenv
+    load_dotenv('.env')
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -29,12 +27,12 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/5.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = os.getenv("SECRET_KEY")
+SECRET_KEY = os.environ.get("SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = os.getenv("DEBUG", "False").lower() == "true"
+DEBUG = os.environ.get('DEBUG')
 
-ALLOWED_HOSTS = os.getenv("ALLOWED_HOSTS", "").split(",")
+ALLOWED_HOSTS = os.environ.get("ALLOWED_HOSTS", "").split(",")
 
 
 # Application definition
@@ -153,8 +151,8 @@ LOGIN_URL = "login"
 AUTH_USER_MODEL = 'users.User'
 
 ROLLBAR = {
-    "access_token": os.getenv("ROLLBAR_ACCESS_TOKEN"),
-    "environment": os.getenv("ENVIRONMENT", "development"),
+    "access_token": os.environ.get("ROLLBAR_ACCESS_TOKEN"),
+    "environment": os.environ.get("ENVIRONMENT", "development"),
     "code_version": "1.0",
     "root": BASE_DIR,
 }
