@@ -1,5 +1,6 @@
 from django.test import TestCase
 from django.urls import reverse
+
 from task_manager.statuses.models import Statuses
 from task_manager.users.models import User
 

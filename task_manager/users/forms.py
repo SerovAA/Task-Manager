@@ -11,14 +11,14 @@ class RegisterUserForm(UserCreationForm):
     first_name = forms.CharField(label=_("Name"))
     last_name = forms.CharField(label=_("Family"))
     username = forms.CharField(
-        label = _('Username'),
+        label=_('Username'),
         help_text=TEXT + TEXT2)
     password1 = forms.CharField(
-        label = _('Password'),
-        widget = forms.PasswordInput())
+        label=_('Password'),
+        widget=forms.PasswordInput())
     password2 = forms.CharField(
-        label = _('Password confirmation'),
-        widget = forms.PasswordInput())
+        label=_('Password confirmation'),
+        widget=forms.PasswordInput())
 
     class Meta:
         model = get_user_model()

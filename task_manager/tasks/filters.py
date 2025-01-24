@@ -1,6 +1,6 @@
 from django.forms import CheckboxInput
-from django_filters import BooleanFilter, FilterSet, ModelChoiceFilter
 from django.utils.translation import gettext as _
+from django_filters import BooleanFilter, FilterSet, ModelChoiceFilter
 
 from task_manager.labels.models import Labels
 from task_manager.statuses.models import Statuses

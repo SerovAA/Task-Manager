@@ -1,6 +1,8 @@
 from django.test import TestCase
 from django.urls import reverse
+
 from task_manager.users.models import User
+
 
 class TestUsers(TestCase):
     def setUp(self):
@@ -24,7 +26,8 @@ class TestUsers(TestCase):
 
         response = self.client.get(reverse("users_create"))
         self.assertEqual(response.status_code, 200)
-        self.assertTemplateUsed(response, template_name="actions/create_or_update.html")
+        self.assertTemplateUsed(response,
+                                template_name="actions/create_or_update.html")
 
         response = self.client.post(
             reverse("users_create"),
@@ -41,7 +44,8 @@ class TestUsers(TestCase):
         self.assertRedirects(response, reverse("login"))
 
         user = User.objects.last()
-        self.assertEqual([user.first_name, user.last_name, user.username], ["Alice", "Johnson", "alicejohnson"])
+        self.assertEqual([user.first_name, user.last_name, user.username],
+                         ["Alice", "Johnson", "alicejohnson"])
 
         self.assertEqual(User.objects.count(), 3)
 
@@ -53,14 +57,17 @@ class TestUsers(TestCase):
 
         self.assertEqual(User.objects.count(), 2)
 
-        response = self.client.get(reverse("users_update", kwargs={"user_id": user.id}))
+        response = self.client.get(reverse("users_update",
+                                           kwargs={"user_id": user.id}))
         self.assertEqual(response.status_code, 302)
         self.assertRedirects(response, reverse("login"))
 
         self.client.force_login(user)
-        response = self.client.get(reverse("users_update", kwargs={"user_id": user.id}))
+        response = self.client.get(reverse("users_update",
+                                           kwargs={"user_id": user.id}))
         self.assertEqual(response.status_code, 200)
-        self.assertTemplateUsed(response, template_name="actions/create_or_update.html")
+        self.assertTemplateUsed(response,
+                                template_name="actions/create_or_update.html")
 
         response = self.client.post(
             reverse("users_update", kwargs={"user_id": user.id}),
@@ -83,15 +90,18 @@ class TestUsers(TestCase):
 
         self.assertEqual(User.objects.count(), 2)
 
-        response = self.client.get(reverse("users_delete", kwargs={"user_id": user.id}))
+        response = self.client.get(reverse("users_delete",
+                                           kwargs={"user_id": user.id}))
         self.assertEqual(response.status_code, 302)
         self.assertRedirects(response, reverse("login"))
 
         self.client.force_login(user)
-        response = self.client.get(reverse("users_delete", kwargs={"user_id": user.id}))
+        response = self.client.get(reverse("users_delete",
+                                           kwargs={"user_id": user.id}))
         self.assertEqual(response.status_code, 200)
 
-        response = self.client.post(reverse("users_delete", kwargs={"user_id": user.id}))
+        response = self.client.post(reverse("users_delete",
+                                            kwargs={"user_id": user.id}))
         self.assertRedirects(response, reverse("users"))
 
         self.assertEqual(User.objects.count(), 1)

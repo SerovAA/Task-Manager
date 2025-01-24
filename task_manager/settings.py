@@ -29,14 +29,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = os.getenv("SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = os.getenv("DEBUG", "False").lower() == "true"
 
-ALLOWED_HOSTS = [
-    "webserver",
-    "127.0.0.1",
-    "localhost",
-    "https://python-project-52-kxra.onrender.com"
-]
+ALLOWED_HOSTS = os.getenv("ALLOWED_HOSTS", "").split(",")
 
 
 # Application definition
@@ -156,7 +151,7 @@ AUTH_USER_MODEL = 'users.User'
 
 ROLLBAR = {
     "access_token": os.getenv("ACCESS_TOKEN"),
-    "environment": "development" if DEBUG else "production",
+    "environment": os.getenv("ENVIRONMENT", "development"),
     "code_version": "1.0",
     "root": BASE_DIR,
 }
