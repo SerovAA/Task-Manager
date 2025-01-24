@@ -12,11 +12,14 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 
 import os
 from pathlib import Path
-
 import dj_database_url
 from dotenv import load_dotenv
 
-load_dotenv()
+if "DEBUG" not in os.environ:
+    load_dotenv(".env_example")
+else:
+    load_dotenv()
+
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -31,7 +34,7 @@ SECRET_KEY = os.getenv("SECRET_KEY")
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.getenv("DEBUG", "False").lower() == "true"
 
-ALLOWED_HOSTS = os.getenv("ALLOWED_HOSTS", "*").split(",")
+ALLOWED_HOSTS = os.getenv("ALLOWED_HOSTS", "").split(",")
 
 
 # Application definition
@@ -150,7 +153,7 @@ LOGIN_URL = "login"
 AUTH_USER_MODEL = 'users.User'
 
 ROLLBAR = {
-    "access_token": os.getenv("ACCESS_TOKEN"),
+    "access_token": os.getenv("ROLLBAR_ACCESS_TOKEN"),
     "environment": os.getenv("ENVIRONMENT", "development"),
     "code_version": "1.0",
     "root": BASE_DIR,
