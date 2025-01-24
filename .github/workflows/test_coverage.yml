@@ -26,7 +26,7 @@ jobs:
         env:
           CC_TEST_REPORTER_ID: ${{ secrets.CC_TEST_REPORTER_ID }}
         with:
-          coverageCommand: python3 -m pytest --cov=task_manager --cov-report=xml:coverage.xml
+          coverageCommand: uv run python3 -m pytest --cov=task_manager --cov-report=xml:coverage.xml
           debug: true
 
 
