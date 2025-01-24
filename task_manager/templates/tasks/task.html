@@ -1,10 +1,11 @@
 {% extends 'base.html' %}
+{% load i18n %}
 
 {% block content %}
 
 <div class="container wrapper flex-grow-1">
 
-    <h1 class="my-4">Просмотр задачи</h1>
+    <h1 class="my-4">{% trans "Viewing a task" %}</h1>
 
 <div class="card">
     <div class="card-header bg-secondary text-white">
@@ -17,27 +18,27 @@
 
   <div class="container">
     <div class="row p-1">
-      <div class="col">Автор</div>
+      <div class="col">{% trans "Author" %}</div>
       <div class="col">{{ task.author }}</div>
     </div>
 
     <div class="row p-1">
-      <div class="col">Исполнитель</div>
+      <div class="col">{% trans "Executor" %}</div>
       <div class="col">{{ task.executor }}</div>
     </div>
 
     <div class="row p-1">
-      <div class="col">Статус</div>
+      <div class="col">{% trans "Status" %}</div>
       <div class="col">{{ task.status }}</div>
     </div>
     <div class="row p-1">
-      <div class="col">Дата создания</div>
+      <div class="col">{% trans "Date of creation" %}</div>
       <div class="col">{{ task.time_create|date:"d.m.Y H:i" }}</div>
     </div>
 
     <div class="row p-1">
       <div class="col">
-        <h6>Метки:</h6>
+        <h6>{% trans "Labels" %}:</h6>
         <ul>
         {% for label in task.labels.all %}
             <li>{{ label }}</li>
@@ -47,9 +48,9 @@
     </div>
     <div class="row p-1">
       <div class="col">
-        <a href="{% url 'task_update' task.id %}">Изменить</a>
+        <a href="{% url 'task_update' task.id %}">{% trans "Update" %}</a>
         <br>
-        <a href="{% url 'task_delete' task.id %}">Удалить</a>
+        <a href="{% url 'task_delete' task.id %}">{% trans "Delete" %}</a>
       </div>
     </div>
   </div>

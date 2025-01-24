@@ -1,63 +1,62 @@
 from django.contrib.messages.views import SuccessMessageMixin
 from django.urls import reverse_lazy
 from django.views.generic import CreateView, DeleteView, ListView, UpdateView
+from django.utils.translation import gettext as _
 
-from task_manager.custom_contrib_mixins import (
-    MixinDeleteLabel,
-    MixinLoginRequired,
-)
+from task_manager.mixins import (
+    DeleteLabelMixin, LoginRequiredMixin,)
 
 from .forms import CreateUpdateLabelForm
 from .models import Labels
 
 
-class LabelsHome(MixinLoginRequired, SuccessMessageMixin, ListView):
+class LabelsHome(LoginRequiredMixin, SuccessMessageMixin, ListView):
     model = Labels
     template_name = "labels/labels.html"
     context_object_name = "labels"
-    extra_context = {"title": 'Метки'}
+    extra_context = {"title": _("Labels")}
 
     def get_queryset(self):
         return Labels.objects.all()
 
 
-class LabelsCreate(MixinLoginRequired, SuccessMessageMixin, CreateView):
+class LabelsCreate(LoginRequiredMixin, SuccessMessageMixin, CreateView):
     form_class = CreateUpdateLabelForm
     model = Labels
     template_name = "actions/create_or_update.html"
     success_url = reverse_lazy("labels")
-    success_message = 'Метка успешно создана'
+    success_message = _("The label was created successfully")
     extra_context = {
-        "title": 'Создать метку',
-        "button_text": 'Создать',
+        "title": _("Create a label"),
+        "button_text": _("Create"),
     }
 
 
-class LabelsUpdate(MixinLoginRequired, SuccessMessageMixin, UpdateView):
+class LabelsUpdate(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
     form_class = CreateUpdateLabelForm
     model = Labels
     template_name = "actions/create_or_update.html"
     success_url = reverse_lazy("labels")
     pk_url_kwarg = "label_id"
     extra_context = {
-        "title": 'Изменение метки',
-        "button_text": 'Изменить',
- }
-    success_message = 'Метка успешно изменена'
+        "title": _("Changing the label"),
+        "button_text": _("Update"),
+    }
+    success_message = _("The label has been successfully changed")
 
 
-class LabelsDelete(MixinLoginRequired, SuccessMessageMixin,
-                   MixinDeleteLabel, DeleteView):
+class LabelsDelete(LoginRequiredMixin, SuccessMessageMixin,
+                   DeleteLabelMixin, DeleteView):
     model = Labels
     template_name = "actions/delete.html"
     pk_url_kwarg = "label_id"
     context_object_name = "labels_Delete"
-    success_message = "Метка успешно удалена"
+    success_message = _("The label was successfully deleted")
     extra_context = {
-        "title": 'Удаление метки',
-        "button_text": 'Да, удалить',
+        "title": _("Deleting a label"),
+        "button_text": _("Delete"),
     }
     success_url = reverse_lazy("labels")
-    messages_for_error = ('Невозможно удалить метку, '
-                          'потому что она используется')
+    messages_for_error = _(
+        "It is not possible to remove the label because it is being used")
     redirect_for_error = "labels"

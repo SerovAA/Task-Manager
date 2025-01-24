@@ -1,11 +1,12 @@
 from django.contrib import messages
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.shortcuts import redirect
+from django.utils.translation import gettext as _
 
 from task_manager.tasks.models import Tasks
 
 
-class MixinDeleteStatus:
+class DeleteStatusMixin:
     messages_for_error = None
     redirect_for_error = None
 
@@ -16,7 +17,7 @@ class MixinDeleteStatus:
         return super().post(request, *args, **kwargs)
 
 
-class MixinDeleteLabel:
+class DeleteLabelMixin:
     messages_for_error = None
     redirect_for_error = None
 
@@ -27,20 +28,20 @@ class MixinDeleteLabel:
         return super().post(request, *args, **kwargs)
 
 
-class MixinDeleteTask:
+class DeleteTaskMixin:
     messages_for_error = None
     redirect_for_error = None
 
     def get(self, request, *args, **kwargs):
         if self.get_object().author != self.request.user:
             messages.error(
-                self.request, 'Задачу может удалить только ее автор'
+                self.request, _("An issue can only be deleted by its author.")
             )
             return redirect(self.redirect_for_error)
         return super().get(request, *args, **kwargs)
 
 
-class MixinDeleteUser:
+class DeleteUserMixin:
     flash_get = None
     flash_post = None
     redirect_for_error = None
@@ -58,7 +59,7 @@ class MixinDeleteUser:
         return super().post(request, *args, **kwargs)
 
 
-class MixinUpdateUser(UserPassesTestMixin):
+class UpdateUserMixin(UserPassesTestMixin):
     messages_for_error = None
     redirect_for_error = None
 
@@ -70,11 +71,12 @@ class MixinUpdateUser(UserPassesTestMixin):
         return user == self.request.user
 
 
-class MixinLoginRequired(LoginRequiredMixin):
+class LoginRequiredMixin(LoginRequiredMixin):
     def dispatch(self, request, *args, **kwargs):
         if not request.user.is_authenticated:
             messages.error(
-                self.request, 'Вы не вошли в систему! '
-                              'Пожалуйста, авторизуйтесь')
+                self.request,
+                _("You are not logged in! Please log in."),
+            )
             return redirect("login")
         return super().dispatch(request, *args, **kwargs)

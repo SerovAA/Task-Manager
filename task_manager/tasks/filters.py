@@ -1,5 +1,6 @@
 from django.forms import CheckboxInput
 from django_filters import BooleanFilter, FilterSet, ModelChoiceFilter
+from django.utils.translation import gettext as _
 
 from task_manager.labels.models import Labels
 from task_manager.statuses.models import Statuses
@@ -10,20 +11,20 @@ from task_manager.users.models import User
 class FilterTasks(FilterSet):
     status = ModelChoiceFilter(
         queryset=Statuses.objects.all(),
-        label='Статус'
+        label=_("Status")
     )
     executor = ModelChoiceFilter(
         queryset=User.objects.all(),
-        label='Исполнитель',
+        label=_("Executor")
     )
     labels = ModelChoiceFilter(
         queryset=Labels.objects.all(),
-        label='Метка',
+        label=_("Label")
     )
     tasks_user = BooleanFilter(
-        label='Только свои задачи',
+        label=_("Only your own tasks"),
         widget=CheckboxInput,
-        method='filter_tasks_user',
+        method='filter_tasks_user'
     )
 
     def filter_tasks_user(self, queryset, name, value):
