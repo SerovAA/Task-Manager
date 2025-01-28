@@ -12,7 +12,7 @@ class TestLabels(TestCase):
             last_name="Doe",
             username="johndoe",
         )
-        Labels.objects.all().delete()
+
 
     def test_label_list(self):
         self.assertEqual(Labels.objects.count(), 0)
