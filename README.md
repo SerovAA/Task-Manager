@@ -14,7 +14,7 @@
 
 
 #### Установить проект себе можно, прописав команды в командной строке:
-- `git clone https://github.com/SerovAA/python-project-52`
+- `git clone https://github.com/SerovAA/Task-Manager.git`
 - `make install`
 - `make migrate`
 
