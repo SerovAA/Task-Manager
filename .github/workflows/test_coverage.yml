@@ -7,35 +7,39 @@ on:
 env:
   SECRET_KEY: ${{ secrets.SECRET_KEY }}
   DJANGO_SETTINGS_MODULE: task_manager.settings
+  QLTY_COVERAGE_TOKEN: ${{ secrets.CC_TEST_REPORTER_ID }}
 
 jobs:
   build:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        python-version: [ '3.10' ]
+        python-version: ['3.10']
+
     steps:
       - uses: actions/checkout@v4
+
       - name: Set up Python ${{ matrix.python-version }}
         uses: actions/setup-python@v4
         with:
           python-version: ${{ matrix.python-version }}
-      - name: Install dependencies
-        run: |
-          curl -LsSf https://astral.sh/uv/install.sh | sh
-          uv sync
 
       - name: Install dependencies
         run: |
           curl -LsSf https://astral.sh/uv/install.sh | sh
-          uv sync
+          # Явно устанавливаем coverage и pytest
           uv pip install coverage pytest
+          # Устанавливаем зависимости проекта
+          if [ -f requirements.txt ]; then
+            uv pip install -r requirements.txt
+          fi
 
       - name: Run tests and generate coverage
         run: |
-          mkdir -p target 
+          mkdir -p target
           python -m coverage run --source=task_manager,tests -m pytest
           python -m coverage lcov -o target/lcov.info
+          python -m coverage report
 
       - name: Upload to QLty
         if: github.ref_name == 'main'
