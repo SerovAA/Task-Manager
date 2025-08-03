@@ -1,7 +1,7 @@
 ### Hexlet tests and linter status:
 [![Actions Status](https://github.com/SerovAA/python-project-52/actions/workflows/hexlet-check.yml/badge.svg)](https://github.com/SerovAA/python-project-52/actions)
-[![Maintainability](https://api.codeclimate.com/v1/badges/307c33127eb014aa24f0/maintainability)](https://codeclimate.com/github/SerovAA/python-project-52/maintainability)
-[![Test Coverage](https://api.codeclimate.com/v1/badges/307c33127eb014aa24f0/test_coverage)](https://codeclimate.com/github/SerovAA/python-project-52/test_coverage)
+[![Maintainability](https://qlty.sh/gh/SerovAA/projects/python-project-52/maintainability.svg)](https://qlty.sh/gh/SerovAA/projects/python-project-52)
+[![Code Coverage](https://qlty.sh/gh/SerovAA/projects/python-project-52/coverage.svg)](https://qlty.sh/gh/SerovAA/projects/python-project-52)
 <p><a href='https://python-project-52-kxra.onrender.com'>Ссылка</a> на веб приложение</p>
 
 ### Task Manager

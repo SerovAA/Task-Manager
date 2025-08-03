@@ -24,14 +24,22 @@ jobs:
         run: |
           curl -LsSf https://astral.sh/uv/install.sh | sh
           uv sync
-      - name: Test & publish code coverage
-        uses: paambaati/codeclimate-action@v5.0.0
+
+      - name: Install dependencies
+        run: |
+          curl -LsSf https://astral.sh/uv/install.sh | sh
+          uv sync
+          uv pip install coverage pytest
+
+      - name: Run tests and generate coverage
+        run: |
+          mkdir -p target 
+          python -m coverage run --source=task_manager,tests -m pytest
+          python -m coverage lcov -o target/lcov.info
+
+      - name: Upload to QLty
         if: github.ref_name == 'main'
-        env:
-          CC_TEST_REPORTER_ID: ${{ secrets.CC_TEST_REPORTER_ID }}
+        uses: qltysh/qlty-action/coverage@v1
         with:
-          coverageCommand: uv run python3 -m pytest --cov=task_manager --cov-report=xml:coverage.xml
-          debug: true
-
-
-
+          token: ${{ secrets.CC_TEST_REPORTER_ID }}
+          files: target/lcov.info
